@@ -1,0 +1,44 @@
+---
+layout: layouts/docs.njk
+eleventyNavigation:
+  key: "Getting Started"
+  pagination:
+  data: collections.docs
+  size: 2
+---
+
+<div>
+  <div class="flex gap-2 text-gray-500">
+    {% set navPages = collections.all |
+    eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true })
+    %}
+
+    <div class="flex gap-2 text-gray-500">
+      <a href="/">Docs Home</a>
+      {% for crumb in navPages %} /
+      <a {% if crumb.url == page.url %} class="text-white" {% endif %} href="{{ crumb.url | url }}">{{ crumb.title | safe }}</a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="text-white pt-6">
+    <h1 id="{{ post_title | slug | safe}}" class="text-4xl font-bold py-3">{{ post_title | safe }}</h1>
+  </div>
+  <div>
+    <article class="leading-6">{{ content | safe }}</article>
+
+    <div class="flex py-10 justify-between text-white">
+
+
+      <button class="px-6 py-3.5 bg-tertiary rounded-lg">Widthdrawal</button>
+      <button class="px-6 py-3.5 bg-tertiary rounded-lg">Wires</button>
+
+    </div>
+  </div>
+
+  <div class="border-t py-10 my-10 flex justify-end">
+    <p class="text-gray-500 leading-5">
+      This page was last updated 4 months ago
+    </p>
+  </div>
+</div>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fintr - {{title | default: "Home"}}</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0f172a",
+              secondary: "#0db9e9",
+              tertiary: "#1e293b",
+            },
+          },
+        },
+      };
+
+      let isSidebarOpen = false;
+
+      function openSidebar() {
+        isSidebarOpen = !isSidebarOpen;
+
+        const sidebarWrapper = document.querySelector("#sidebar_wrapper");
+        const sidebar = document.querySelector("#sidebar");
+        if (!sidebar) return;
+
+        if (isSidebarOpen) {
+          sidebar.classList.add("open", "navbar_drawer");
+          sidebar.classList.remove("overflow-y-auto");
+          sidebar.style.maxWidth = "";
+        } else sidebar.classList.remove("open", "navbar_drawer");
+      }
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/night-owl.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
+
+    <style>
+      .open {
+        display: block !important;
+      }
+
+      .navbar_drawer {
+        position: absolute !important;
+        /* top: 99%; */
+        /* padding: 0 15px; */
+        height: 100%;
+        max-width: 100% !important;
+        width: 100%;
+        justify-content: center;
+        z-index: 20;
+        background: #0f172a;
+      }
+
+      .close {
+        display: none !important;
+      }
+
+      /*  */
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        column-gap: 30px;
+        row-gap: 30px;
+        width: 100%;
+        margin-bottom: 30px;
+        margin-top: 30px;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(375px, 1fr));
+        column-gap: 30px;
+        row-gap: 30px;
+        width: 100%;
+        margin-bottom: 30px;
+        margin-top: 30px;
+      }
+
+      a:not(#mainmenu a):hover {
+        color: #0db9e9;
+      }
+
+      #sidebar::-webkit-scrollbar-track {
+        background: #959595;
+        border-radius: 10px;
+      }
+
+      #sidebar::-webkit-scrollbar-thumb {
+        background: #424242;
+        border-radius: 10px;
+      }
+
+      #sidebar::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      #nohover a:hover {
+        color: #fff !important;
+      }
+
+      hr {
+        margin: 0.5rem 0rem !important;
+        border-color: rgb(57, 56, 56) !important;
+      }
+
+      @media only screen and (max-width: 460px) {
+        .grid-3,
+        .grid-2 {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-primary">
+    <div class="bg-primary h-scren h-full">{{ content }}</div>
+  </body>
+</html>
